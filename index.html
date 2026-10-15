@@ -1,0 +1,402 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#07111f">
+  <meta name="description" content="Practical help with computers, gaming setups, streaming, software, audio, and everyday technology.">
+  <title>Lorenzo’s Tech Tricks | Make Tech Work Smarter</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #07111f; --surface: #0d1b2c; --surface-2: #12253a; --text: #f2f7ff;
+      --muted: #a9bbcf; --accent: #39d5f6; --accent-2: #4287ff; --border: #243b52;
+      --glow: rgba(57,213,246,.14); --shadow: 0 22px 60px rgba(0,0,0,.22);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 88px; }
+    body { margin: 0; background: var(--bg); color: var(--text); font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; line-height: 1.6; }
+    body, button, input, textarea, select { font: inherit; }
+    a { color: inherit; text-decoration: none; }
+    button, a, input, textarea, select { -webkit-tap-highlight-color: transparent; }
+    button, .button { cursor: pointer; }
+    :focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+    .container { width: min(1120px, calc(100% - 40px)); margin-inline: auto; }
+    .site-header { position: sticky; top: 0; z-index: 20; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(18px); border-bottom: 1px solid var(--border); }
+    .header-inner { min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 18px; }
+    .brand { display: inline-flex; align-items: center; gap: 11px; font-weight: 800; letter-spacing: -.035em; white-space: nowrap; }
+    .brand-mark { display: grid; place-items: center; width: 42px; height: 42px; border-radius: 14px; color: #03101b; background: linear-gradient(135deg, var(--accent), var(--accent-2)); box-shadow: 0 8px 24px var(--glow); }
+    .brand-mark svg { width: 23px; height: 23px; }
+    .header-actions { display: flex; align-items: center; gap: 10px; }
+    .nav { display: flex; gap: 24px; align-items: center; margin-left: auto; margin-right: 22px; color: var(--muted); font-size: .92rem; }
+    .nav a:hover, .footer-links a:hover { color: var(--accent); }
+    .button { min-height: 46px; display: inline-flex; align-items: center; justify-content: center; gap: 9px; padding: 11px 18px; border: 1px solid transparent; border-radius: 13px; font-weight: 750; font-size: .94rem; transition: transform .18s ease, background .18s ease, border-color .18s ease; }
+    .button:hover { transform: translateY(-2px); }
+    .button-primary { color: #04111b; background: linear-gradient(110deg, var(--accent), var(--accent-2)); box-shadow: 0 10px 28px var(--glow); }
+    .button-secondary { color: var(--text); border-color: var(--border); background: var(--surface); }
+    .button-quiet { color: var(--text); border-color: var(--border); background: transparent; }
+    .button svg, .contact-icon svg { width: 18px; height: 18px; flex: 0 0 auto; }
+    .icon-button { width: 46px; height: 46px; padding: 0; display: grid; place-items: center; color: var(--text); background: var(--surface); border: 1px solid var(--border); border-radius: 13px; }
+    .icon-button svg { width: 20px; height: 20px; }
+    .hero { padding: 90px 0 76px; overflow: hidden; position: relative; }
+    .hero::before { content: ""; position: absolute; width: 540px; height: 540px; right: -150px; top: -170px; background: radial-gradient(circle, var(--glow), transparent 68%); pointer-events: none; }
+    .hero-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: 56px; align-items: center; position: relative; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 9px; color: var(--accent); text-transform: uppercase; font-size: .78rem; letter-spacing: .15em; font-weight: 850; }
+    .eyebrow::before { content: ""; width: 22px; height: 2px; background: var(--accent); border-radius: 2px; }
+    h1 { max-width: 680px; font-size: clamp(2.8rem, 6vw, 5.25rem); letter-spacing: -.065em; line-height: 1.02; margin: 20px 0; }
+    .gradient-text { color: var(--accent); background: linear-gradient(105deg, var(--accent), var(--accent-2)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+    .hero-copy { color: var(--muted); font-size: clamp(1.05rem, 1.5vw, 1.2rem); max-width: 590px; }
+    .hero-buttons { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 30px; }
+    .hero-note { display: flex; align-items: center; gap: 10px; margin-top: 25px; color: var(--muted); font-size: .9rem; }
+    .status-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 5px var(--glow); }
+    .hero-art { min-height: 370px; position: relative; display: grid; place-items: center; }
+    .orbit { width: min(100%, 390px); aspect-ratio: 1; border: 1px solid var(--border); border-radius: 50%; display: grid; place-items: center; position: relative; background: radial-gradient(circle, var(--glow), transparent 66%); }
+    .orbit::before, .orbit::after { content: ""; position: absolute; border: 1px solid var(--border); border-radius: 50%; }
+    .orbit::before { inset: 12%; } .orbit::after { inset: 25%; }
+    .tech-core { width: 135px; height: 135px; z-index: 1; display: grid; place-items: center; border-radius: 36px; background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: #04111b; box-shadow: 0 20px 60px var(--glow); transform: rotate(-7deg); }
+    .tech-core svg { width: 65px; height: 65px; }
+    .float-card { position: absolute; z-index: 2; display: flex; align-items: center; gap: 11px; padding: 14px 16px; border: 1px solid var(--border); border-radius: 16px; background: var(--surface); box-shadow: var(--shadow); animation: float 5s ease-in-out infinite; }
+    .float-card strong { display: block; font-size: .9rem; } .float-card small { color: var(--muted); display: block; font-size: .78rem; }
+    .float-icon { width: 38px; height: 38px; display: grid; place-items: center; color: var(--accent); background: var(--surface-2); border-radius: 12px; }
+    .float-icon svg { width: 19px; height: 19px; }
+    .float-one { left: -3%; top: 16%; } .float-two { right: -3%; bottom: 17%; animation-delay: -2.5s; }
+    @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-9px); } }
+    section { padding: 78px 0; }
+    .section-head { max-width: 680px; margin-bottom: 34px; }
+    .section-head h2 { margin: 12px 0; font-size: clamp(2rem, 4vw, 3.1rem); line-height: 1.1; letter-spacing: -.045em; }
+    .section-head p { margin: 0; color: var(--muted); }
+    .services-section { background: var(--surface); border-block: 1px solid var(--border); }
+    .service-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+    .service-card { padding: 24px; background: var(--bg); border: 1px solid var(--border); border-radius: 20px; display: flex; flex-direction: column; min-height: 222px; transition: transform .2s ease, border-color .2s ease; }
+    .service-card:hover { transform: translateY(-4px); border-color: var(--accent); }
+    .service-icon { width: 48px; height: 48px; display: grid; place-items: center; color: var(--accent); background: var(--surface-2); border-radius: 15px; margin-bottom: 18px; }
+    .service-icon svg { width: 24px; height: 24px; }
+    .service-card h3 { margin: 0 0 7px; font-size: 1.08rem; }
+    .service-card p { margin: 0 0 20px; color: var(--muted); font-size: .92rem; flex: 1; }
+    .text-link { display: inline-flex; align-items: center; gap: 8px; width: fit-content; color: var(--accent); font-weight: 800; font-size: .9rem; background: none; border: 0; padding: 0; }
+    .text-link svg { width: 16px; height: 16px; }
+    .booking-layout { display: grid; grid-template-columns: .72fr 1.28fr; gap: 38px; align-items: start; }
+    .booking-aside { position: sticky; top: 105px; padding: 28px; background: var(--surface); border: 1px solid var(--border); border-radius: 22px; }
+    .booking-aside h3 { font-size: 1.35rem; margin: 0 0 10px; }
+    .booking-aside p { color: var(--muted); font-size: .94rem; }
+    .aside-list { list-style: none; padding: 0; margin: 22px 0 0; display: grid; gap: 15px; }
+    .aside-list li { display: flex; gap: 11px; align-items: flex-start; font-size: .92rem; }
+    .check { color: var(--accent); font-weight: 900; }
+    .booking-form { padding: 30px; border: 1px solid var(--border); background: var(--surface); border-radius: 22px; box-shadow: var(--shadow); }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .field { display: flex; flex-direction: column; gap: 7px; min-width: 0; }
+    .field.full { grid-column: 1 / -1; }
+    label { font-weight: 750; font-size: .88rem; }
+    .required { color: var(--accent); }
+    input, textarea, select { width: 100%; color: var(--text); background: var(--bg); border: 1px solid var(--border); border-radius: 11px; padding: 12px 13px; min-height: 48px; }
+    textarea { min-height: 120px; resize: vertical; }
+    input::placeholder, textarea::placeholder { color: color-mix(in srgb, var(--muted) 75%, transparent); }
+    input:focus, textarea:focus, select:focus { border-color: var(--accent); outline: 2px solid var(--glow); }
+    .field-help { color: var(--muted); font-size: .8rem; }
+    .consent { display: flex; align-items: flex-start; gap: 11px; margin: 20px 0; color: var(--muted); font-size: .88rem; }
+    .consent input { width: 18px; min-height: 18px; height: 18px; margin-top: 4px; accent-color: var(--accent); flex: 0 0 auto; }
+    .form-submit { width: 100%; min-height: 54px; }
+    .form-status { display: none; margin-top: 16px; padding: 14px 16px; border-radius: 12px; font-size: .92rem; }
+    .form-status.show { display: block; }
+    .form-status.success { color: var(--text); border: 1px solid var(--accent); background: var(--glow); }
+    .form-status.error { color: var(--text); border: 1px solid #f17c7c; background: rgba(241,124,124,.1); }
+    .contact-section { background: var(--surface); border-top: 1px solid var(--border); }
+    .contact-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .contact-card { display: flex; align-items: center; gap: 16px; padding: 22px; border: 1px solid var(--border); border-radius: 18px; background: var(--bg); min-width: 0; }
+    .contact-icon { display: grid; place-items: center; flex: 0 0 auto; width: 48px; height: 48px; border-radius: 14px; color: var(--accent); background: var(--surface-2); }
+    .contact-card h3 { margin: 0 0 2px; font-size: 1rem; } .contact-card p { margin: 0; color: var(--muted); font-size: .85rem; overflow-wrap: anywhere; }
+    .contact-card .text-link { margin-top: 7px; }
+    .site-footer { padding: 35px 0; }
+    .footer-main { display: flex; align-items: center; justify-content: space-between; gap: 28px; }
+    .footer-description { color: var(--muted); max-width: 410px; font-size: .9rem; margin: 12px 0 0; }
+    .footer-links { display: flex; flex-wrap: wrap; gap: 18px; color: var(--muted); font-size: .88rem; }
+    .footer-bottom { display: flex; justify-content: space-between; gap: 20px; padding-top: 25px; margin-top: 28px; border-top: 1px solid var(--border); color: var(--muted); font-size: .82rem; }
+    .settings-backdrop { position: fixed; inset: 0; z-index: 40; background: rgba(0,0,0,.55); opacity: 0; pointer-events: none; transition: opacity .2s ease; }
+    .settings-backdrop.open { opacity: 1; pointer-events: auto; }
+    .settings-panel { position: fixed; z-index: 41; top: 0; right: 0; height: 100dvh; width: min(420px, 100%); overflow-y: auto; padding: 25px; background: var(--surface); border-left: 1px solid var(--border); box-shadow: var(--shadow); transform: translateX(102%); transition: transform .25s ease; }
+    .settings-panel.open { transform: translateX(0); }
+    .settings-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 10px; }
+    .settings-head h2 { margin: 0; font-size: 1.45rem; }
+    .settings-panel > p { color: var(--muted); font-size: .9rem; margin-bottom: 25px; }
+    .theme-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .theme-option { text-align: left; color: var(--text); background: var(--bg); border: 1px solid var(--border); border-radius: 14px; padding: 12px; }
+    .theme-option[aria-pressed="true"] { border-color: var(--accent); box-shadow: 0 0 0 2px var(--glow); }
+    .swatches { display: flex; gap: 5px; margin-bottom: 10px; }
+    .swatches span { display: block; width: 25px; height: 25px; border-radius: 8px; border: 1px solid rgba(255,255,255,.14); }
+    .theme-option strong { display: block; font-size: .9rem; }
+    .theme-option small { display: block; color: var(--muted); font-size: .75rem; margin-top: 2px; }
+    .reset-button { width: 100%; margin-top: 22px; }
+    .mobile-menu { display: none; }
+    @media (max-width: 900px) {
+      .nav { gap: 14px; margin-right: 8px; }
+      .nav a { font-size: .85rem; }
+      .hero-grid { gap: 22px; }
+      .service-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .booking-layout { grid-template-columns: 1fr; }
+      .booking-aside { position: static; }
+    }
+    @media (max-width: 680px) {
+      .container { width: min(100% - 30px, 540px); }
+      .header-inner { min-height: 68px; flex-wrap: wrap; padding: 10px 0; }
+      .brand { font-size: .92rem; }
+      .brand-mark { width: 37px; height: 37px; border-radius: 12px; }
+      .header-actions { gap: 7px; }
+      .header-actions .button { min-height: 42px; padding: 9px 12px; font-size: .86rem; }
+      .header-actions .icon-button { width: 42px; height: 42px; }
+      .nav { order: 3; width: 100%; overflow-x: auto; margin: 0; padding: 7px 0 2px; gap: 21px; white-space: nowrap; }
+      .nav a { font-size: .86rem; }
+      .hero { padding: 54px 0 46px; }
+      .hero-grid { grid-template-columns: 1fr; }
+      h1 { font-size: clamp(2.7rem, 13vw, 4.1rem); }
+      .hero-art { min-height: 300px; margin-top: -4px; }
+      .orbit { width: min(85%, 310px); }
+      .tech-core { width: 105px; height: 105px; border-radius: 29px; }
+      .tech-core svg { width: 52px; height: 52px; }
+      .float-card { padding: 10px 12px; }
+      .float-one { left: 0; top: 13%; } .float-two { right: 0; bottom: 11%; }
+      section { padding: 58px 0; }
+      .service-grid, .contact-grid { grid-template-columns: 1fr; }
+      .service-card { min-height: 0; }
+      .booking-form { padding: 20px; }
+      .form-grid { grid-template-columns: 1fr; gap: 15px; }
+      .field.full { grid-column: auto; }
+      .footer-main, .footer-bottom { align-items: flex-start; flex-direction: column; }
+      .footer-links { gap: 13px 18px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+    }
+    /* Theme palettes */
+    [data-theme="purple"] { --bg:#0d0b1c; --surface:#17142b; --surface-2:#242044; --text:#f7f4ff; --muted:#bbb4d7; --accent:#c084fc; --accent-2:#628bff; --border:#373052; --glow:rgba(192,132,252,.16); color-scheme:dark; }
+    [data-theme="green"] { --bg:#08120e; --surface:#101f18; --surface-2:#1a3023; --text:#effcf4; --muted:#a8c5b3; --accent:#53e69b; --accent-2:#a2e635; --border:#294a37; --glow:rgba(83,230,155,.14); color-scheme:dark; }
+    [data-theme="orange"] { --bg:#17100b; --surface:#24180f; --surface-2:#382317; --text:#fff7ef; --muted:#d0b7a3; --accent:#ffad5c; --accent-2:#ff6b35; --border:#503521; --glow:rgba(255,173,92,.15); color-scheme:dark; }
+    [data-theme="light"] { --bg:#f5f8fc; --surface:#ffffff; --surface-2:#eaf1f8; --text:#142235; --muted:#52677e; --accent:#087fa7; --accent-2:#355be8; --border:#d8e2ed; --glow:rgba(8,127,167,.12); --shadow:0 22px 60px rgba(22,45,72,.10); color-scheme:light; }
+    [data-theme="dark"] { --bg:#080b12; --surface:#111722; --surface-2:#1a2433; --text:#f4f7fb; --muted:#a6b1c2; --accent:#d2e3ff; --accent-2:#8daeff; --border:#2b3545; --glow:rgba(141,174,255,.13); color-scheme:dark; }
+  </style>
+</head>
+<body data-theme="blue">
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#home" aria-label="Lorenzo’s Tech Tricks home">
+        <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="m8 7-5 5 5 5M16 7l5 5-5 5M14 4l-4 16"/></svg></span>
+        <span>Lorenzo’s Tech Tricks</span>
+      </a>
+      <nav class="nav" aria-label="Main navigation">
+        <a href="#home">Home</a><a href="#services">Services</a><a href="#booking">Book Now</a><a href="#contact">Contact</a>
+      </nav>
+      <div class="header-actions">
+        <a class="button button-primary" href="tel:+14136547039" aria-label="Call Lorenzo at 413-654-7039"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.4 19.4 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7l.5 3.1a2 2 0 0 1-.6 1.9L7.1 10.6a16 16 0 0 0 6.3 6.3l1.9-1.9a2 2 0 0 1 1.9-.6l3.1.5a2 2 0 0 1 1.7 2Z"/></svg><span>Call</span></a>
+        <button class="icon-button" id="openSettings" aria-label="Open website settings" title="Settings"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="m19.4 15 .1.1 1.4 1.1-1.4 2.4-1.7-.7a8 8 0 0 1-1.6.9l-.3 1.8h-2.8l-.3-1.8a8 8 0 0 1-1.6-.9l-1.7.7-1.4-2.4 1.4-1.1a7 7 0 0 1 0-1.9l-1.4-1.1 1.4-2.4 1.7.7a8 8 0 0 1 1.6-.9l.3-1.8h2.8l.3 1.8a8 8 0 0 1 1.6.9l1.7-.7 1.4 2.4-1.4 1.1a7 7 0 0 1 0 1.9Z" transform="translate(-1 -1) scale(1.08)"/></svg></button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+        <div>
+          <span class="eyebrow">Tech help, made simple</span>
+          <h1>Make Tech Work <span class="gradient-text">Smarter.</span></h1>
+          <p class="hero-copy">Straightforward help for computers, gaming setups, streaming, software, audio, and everyday tech problems. Tell me what you’re working on and we’ll take it from there.</p>
+          <div class="hero-buttons">
+            <a class="button button-primary" href="#booking">Book Now <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+            <a class="button button-secondary" href="tel:+14136547039"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.4 19.4 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7l.5 3.1a2 2 0 0 1-.6 1.9L7.1 10.6a16 16 0 0 0 6.3 6.3l1.9-1.9a2 2 0 0 1 1.9-.6l3.1.5a2 2 0 0 1 1.7 2Z"/></svg> Call Now</a>
+          </div>
+          <div class="hero-note"><span class="status-dot"></span> Booking requests are reviewed before any appointment is confirmed.</div>
+        </div>
+        <div class="hero-art" aria-hidden="true">
+          <div class="orbit"><div class="tech-core"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4M7 9l-2 2 2 2M17 9l2 2-2 2M13.5 8.5l-3 5"/></svg></div></div>
+          <div class="float-card float-one"><span class="float-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8h12a4 4 0 0 1 4 4v4a2 2 0 0 1-2 2h-2l-3-3H9l-3 3H4a2 2 0 0 1-2-2v-4a4 4 0 0 1 4-4Z"/><path d="M7 11v4M5 13h4M16 12h.01M19 14h.01"/></svg></span><span><strong>Gaming setups</strong><small>Ready to play</small></span></div>
+          <div class="float-card float-two"><span class="float-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m10 9 5 3-5 3z"/></svg></span><span><strong>Creator tools</strong><small>Stream and record</small></span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="services-section" id="services">
+      <div class="container">
+        <div class="section-head"><span class="eyebrow">Services & help topics</span><h2>What can I help you with?</h2><p>Choose a topic to start a booking request. If your issue doesn’t fit a category, select Other and explain what you need.</p></div>
+        <div class="service-grid" id="serviceGrid"></div>
+      </div>
+    </section>
+
+    <section id="booking">
+      <div class="container">
+        <div class="section-head"><span class="eyebrow">Book a request</span><h2>Let’s figure it out.</h2><p>Share a few details about the issue. Your request is not an appointment confirmation. Lorenzo will follow up to discuss availability.</p></div>
+        <div class="booking-layout">
+          <aside class="booking-aside">
+            <h3>Simple from start to finish</h3>
+            <p>Send your request with enough detail to help explain the problem. You don’t need to create an account.</p>
+            <ul class="aside-list"><li><span class="check">✓</span><span>Pick the closest help topic.</span></li><li><span class="check">✓</span><span>Describe what’s happening and what you’ve tried.</span></li><li><span class="check">✓</span><span>Choose how you’d prefer to be contacted.</span></li><li><span class="check">✓</span><span>Wait for a separate confirmation before treating a time as booked.</span></li></ul>
+          </aside>
+          <form class="booking-form" id="bookingForm" action="https://formsubmit.co/ajax/lorenzonai90@gmail.com" method="POST">
+            <input type="hidden" name="_subject" id="emailSubject" value="New Tech Help Request">
+            <input type="hidden" name="_template" value="table">
+            <input type="hidden" name="_captcha" value="true">
+            <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px">
+            <div class="form-grid">
+              <div class="field"><label for="fullName">Full name <span class="required">*</span></label><input id="fullName" name="Full name" autocomplete="name" placeholder="Your full name" required></div>
+              <div class="field"><label for="email">Email address <span class="required">*</span></label><input id="email" name="Email address" type="email" autocomplete="email" placeholder="you@example.com" required></div>
+              <div class="field"><label for="phone">Phone number <span class="required">*</span></label><input id="phone" name="Phone number" type="tel" autocomplete="tel" placeholder="Your phone number" required></div>
+              <div class="field"><label for="topic">What do you need help with? <span class="required">*</span></label><select id="topic" name="Help topic" required><option value="">Choose a topic</option><option>PC Help</option><option>Gaming Setup</option><option>Software Help</option><option>Streaming Setup</option><option>Audio Help</option><option>Video Editing</option><option>Troubleshooting</option><option>General Tech Help</option><option>Other</option></select></div>
+              <div class="field full"><label for="description">Describe the problem <span class="required">*</span></label><textarea id="description" name="Problem description" placeholder="What is happening? Include any error messages and what you have already tried. If you chose Other, explain your request here." required></textarea><span class="field-help">Please don’t include passwords, payment details, or other sensitive account information.</span></div>
+              <div class="field"><label for="date">Preferred date</label><input id="date" name="Preferred date" type="date"></div>
+              <div class="field"><label for="time">Preferred time</label><input id="time" name="Preferred time" type="time"></div>
+              <div class="field"><label for="contactMethod">Preferred contact method</label><select id="contactMethod" name="Preferred contact method"><option value="">No preference</option><option>Email</option><option>Phone</option></select></div>
+              <div class="field"><label for="extra">Additional information</label><input id="extra" name="Additional information" placeholder="Optional details"></div>
+              <div class="field full"><label for="accuracy" class="consent"><input id="accuracy" name="Information accuracy and contact consent" type="checkbox" value="Confirmed" required><span>I confirm the information is accurate and agree to be contacted about this request. <span class="required">*</span></span></label></div>
+            </div>
+            <button class="button button-primary form-submit" id="submitButton" type="submit">Submit Booking Request <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13"/><path d="m22 2-7 20-4-9-9-4Z"/></svg></button>
+            <div class="form-status" id="formStatus" role="status" aria-live="polite"></div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact-section" id="contact">
+      <div class="container">
+        <div class="section-head"><span class="eyebrow">Contact</span><h2>Want to reach out directly?</h2><p>Choose the contact option that works best for you.</p></div>
+        <div class="contact-grid">
+          <div class="contact-card"><span class="contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.4 8.4 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8Z"/></svg></span><div><h3>WhatsApp Us</h3><p>+1 413-654-7039</p><a class="text-link" href="https://wa.me/14136547039" target="_blank" rel="noopener noreferrer">Open WhatsApp ↗</a></div></div>
+          <div class="contact-card"><span class="contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span><div><h3>Email Us</h3><p>lorenzonai90@gmail.com</p><a class="text-link" href="mailto:lorenzonai90@gmail.com">Send an email ↗</a></div></div>
+          <div class="contact-card"><span class="contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.4 19.4 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7l.5 3.1a2 2 0 0 1-.6 1.9L7.1 10.6a16 16 0 0 0 6.3 6.3l1.9-1.9a2 2 0 0 1 1.9-.6l3.1.5a2 2 0 0 1 1.7 2Z"/></svg></span><div><h3>Call Us</h3><p>+1 413-654-7039</p><a class="text-link" href="tel:+14136547039">Call Lorenzo ↗</a></div></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-main">
+        <div><a class="brand" href="#home"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="m8 7-5 5 5 5M16 7l5 5-5 5M14 4l-4 16"/></svg></span><span>Lorenzo’s Tech Tricks</span></a><p class="footer-description">Practical, approachable technology help for computers, gaming, streaming, software, and more.</p></div>
+        <nav class="footer-links" aria-label="Footer navigation"><a href="#home">Home</a><a href="#services">Services</a><a href="#booking">Book Now</a><a href="#contact">Contact</a><a href="https://wa.me/14136547039" target="_blank" rel="noopener noreferrer">WhatsApp</a><a href="mailto:lorenzonai90@gmail.com">Email</a><a href="tel:+14136547039">Call</a></nav>
+      </div>
+      <div class="footer-bottom"><span>© <span id="year"></span> Lorenzo’s Tech Tricks. All rights reserved.</span><span>Booking requests are subject to separate confirmation.</span></div>
+    </div>
+  </footer>
+
+  <div class="settings-backdrop" id="settingsBackdrop"></div>
+  <aside class="settings-panel" id="settingsPanel" role="dialog" aria-modal="true" aria-labelledby="settingsTitle" aria-hidden="true">
+    <div class="settings-head"><h2 id="settingsTitle">Appearance settings</h2><button class="icon-button" id="closeSettings" aria-label="Close settings"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m18 6-12 12M6 6l12 12"/></svg></button></div>
+    <p>Choose a color theme. It updates right away and is saved on this device when browser storage is available.</p>
+    <div class="theme-grid" id="themeGrid">
+      <button class="theme-option" data-theme-choice="blue" aria-pressed="true"><span class="swatches"><span style="background:#07111f"></span><span style="background:#39d5f6"></span><span style="background:#4287ff"></span></span><strong>Blue & cyan</strong><small>Default theme</small></button>
+      <button class="theme-option" data-theme-choice="purple" aria-pressed="false"><span class="swatches"><span style="background:#0d0b1c"></span><span style="background:#c084fc"></span><span style="background:#628bff"></span></span><strong>Purple & blue</strong><small>Cool and creative</small></button>
+      <button class="theme-option" data-theme-choice="green" aria-pressed="false"><span class="swatches"><span style="background:#08120e"></span><span style="background:#53e69b"></span><span style="background:#a2e635"></span></span><strong>Green & black</strong><small>Fresh and focused</small></button>
+      <button class="theme-option" data-theme-choice="orange" aria-pressed="false"><span class="swatches"><span style="background:#17100b"></span><span style="background:#ffad5c"></span><span style="background:#ff6b35"></span></span><strong>Orange & black</strong><small>Warm and bold</small></button>
+      <button class="theme-option" data-theme-choice="light" aria-pressed="false"><span class="swatches"><span style="background:#f5f8fc"></span><span style="background:#087fa7"></span><span style="background:#355be8"></span></span><strong>Light mode</strong><small>Bright interface</small></button>
+      <button class="theme-option" data-theme-choice="dark" aria-pressed="false"><span class="swatches"><span style="background:#080b12"></span><span style="background:#d2e3ff"></span><span style="background:#8daeff"></span></span><strong>Dark mode</strong><small>Low-light interface</small></button>
+    </div>
+    <button class="button button-secondary reset-button" id="resetTheme">Reset to default</button>
+  </aside>
+
+  <script>
+    const services = [
+      { title: "Computer & PC Help", topic: "PC Help", description: "Help with computer setup, settings, performance questions, and common PC issues.", icon: "monitor" },
+      { title: "Gaming Setup", topic: "Gaming Setup", description: "Help with gaming peripherals, console or PC setup, and getting your setup organized.", icon: "gamepad" },
+      { title: "Software & Apps", topic: "Software Help", description: "Guidance with installing, configuring, or learning everyday software and applications.", icon: "grid" },
+      { title: "Streaming & Recording", topic: "Streaming Setup", description: "Help getting streaming or recording tools, scenes, and basic workflows set up.", icon: "video" },
+      { title: "Microphone & Audio", topic: "Audio Help", description: "Work through microphone, headset, sound settings, and audio routing questions.", icon: "mic" },
+      { title: "Video Editing", topic: "Video Editing", description: "Help getting started with editing apps, creator tools, and simple video workflows.", icon: "scissors" },
+      { title: "Troubleshooting", topic: "Troubleshooting", description: "Describe an error or tech problem and get help working through possible causes.", icon: "wrench" },
+      { title: "General Tech Questions", topic: "General Tech Help", description: "Ask a technology question or get guidance choosing a sensible next step.", icon: "message" },
+      { title: "Something Else", topic: "Other", description: "Have a different tech-related request? Select this and explain it in the form.", icon: "sparkles" }
+    ];
+    const iconPaths = {
+      monitor: '<rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4"/>',
+      gamepad: '<path d="M6 8h12a4 4 0 0 1 4 4v4a2 2 0 0 1-2 2h-2l-3-3H9l-3 3H4a2 2 0 0 1-2-2v-4a4 4 0 0 1 4-4Z"/><path d="M7 11v4M5 13h4M16 12h.01M19 14h.01"/>',
+      grid: '<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>',
+      video: '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m10 9 5 3-5 3z"/>',
+      mic: '<rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10v2a7 7 0 0 0 14 0v-2M12 19v3M8 22h8"/>',
+      scissors: '<circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="m8.2 8.2 12 12M14.8 9.2 20 4M8.2 15.8 12 12"/>',
+      wrench: '<path d="M14.7 6.3a5 5 0 0 0-6.4 6.4L3 18a2.1 2.1 0 0 0 3 3l5.3-5.3a5 5 0 0 0 6.4-6.4L14 13l-3-3z"/>',
+      message: '<path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.4 8.4 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8Z"/>',
+      sparkles: '<path d="m12 3 1.9 5.8L20 11l-6.1 2.2L12 19l-2-5.8L4 11l6-2.2L12 3Z"/><path d="m19 14 1.2 2.8L23 18l-2.8 1.2L19 22l-1.2-2.8L15 18l2.8-1.2L19 14Z"/>',
+      arrow: '<path d="M5 12h14M12 5l7 7-7 7"/>'
+    };
+    const serviceGrid = document.getElementById('serviceGrid');
+    serviceGrid.innerHTML = services.map(s => `<article class="service-card"><div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${iconPaths[s.icon]}</svg></div><h3>${s.title}</h3><p>${s.description}</p><button class="text-link choose-topic" type="button" data-topic="${s.topic}">Choose this topic <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${iconPaths.arrow}</svg></button></article>`).join('');
+    const topicSelect = document.getElementById('topic');
+    document.querySelectorAll('.choose-topic').forEach(button => button.addEventListener('click', () => {
+      topicSelect.value = button.dataset.topic;
+      document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });
+      setTimeout(() => document.getElementById('description').focus({ preventScroll: true }), 450);
+    }));
+
+    const themeNames = ['blue', 'purple', 'green', 'orange', 'light', 'dark'];
+    function applyTheme(theme) {
+      if (!themeNames.includes(theme)) theme = 'blue';
+      document.body.dataset.theme = theme;
+      document.querySelectorAll('[data-theme-choice]').forEach(btn => btn.setAttribute('aria-pressed', String(btn.dataset.themeChoice === theme)));
+      try { localStorage.setItem('ltt-theme', theme); } catch (_) {}
+    }
+    try { applyTheme(localStorage.getItem('ltt-theme') || 'blue'); } catch (_) { applyTheme('blue'); }
+    document.querySelectorAll('[data-theme-choice]').forEach(btn => btn.addEventListener('click', () => applyTheme(btn.dataset.themeChoice)));
+    document.getElementById('resetTheme').addEventListener('click', () => applyTheme('blue'));
+
+    const panel = document.getElementById('settingsPanel');
+    const backdrop = document.getElementById('settingsBackdrop');
+    const openSettings = document.getElementById('openSettings');
+    const closeSettings = document.getElementById('closeSettings');
+    function setSettingsOpen(open) {
+      panel.classList.toggle('open', open); backdrop.classList.toggle('open', open);
+      panel.setAttribute('aria-hidden', String(!open));
+      document.body.style.overflow = open ? 'hidden' : '';
+      if (open) closeSettings.focus(); else openSettings.focus();
+    }
+    openSettings.addEventListener('click', () => setSettingsOpen(true));
+    closeSettings.addEventListener('click', () => setSettingsOpen(false));
+    backdrop.addEventListener('click', () => setSettingsOpen(false));
+    document.addEventListener('keydown', e => { if (e.key === 'Escape' && panel.classList.contains('open')) setSettingsOpen(false); });
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    const form = document.getElementById('bookingForm');
+    const status = document.getElementById('formStatus');
+    const submitButton = document.getElementById('submitButton');
+    const emailSubject = document.getElementById('emailSubject');
+    const description = document.getElementById('description');
+    const topic = document.getElementById('topic');
+    function selectedSubject() {
+      if (topic.value && topic.value !== 'Other') return topic.value;
+      const custom = description.value.trim().split(/[.!?\n]/)[0].trim();
+      return custom ? `Other: ${custom.slice(0, 70)}` : 'Other Tech Help';
+    }
+    function showStatus(kind, message) {
+      status.className = `form-status show ${kind}`;
+      status.textContent = message;
+    }
+    topic.addEventListener('change', () => { emailSubject.value = selectedSubject(); });
+    description.addEventListener('input', () => { emailSubject.value = selectedSubject(); });
+    form.addEventListener('submit', async event => {
+      event.preventDefault();
+      status.className = 'form-status';
+      if (!form.reportValidity()) return;
+      emailSubject.value = selectedSubject();
+      submitButton.disabled = true;
+      submitButton.textContent = 'Sending request…';
+      try {
+        const formData = new FormData(form);
+        formData.set('_subject', emailSubject.value);
+        formData.set('Submission date and time', new Date().toLocaleString());
+        const response = await fetch(form.action, {
+          method: 'POST',
+          body: formData,
+          headers: { 'Accept': 'application/json' }
+        });
+        const result = await response.json().catch(() => ({}));
+        if (!response.ok || result.success === 'false' || result.success === false || result.success === undefined && result.message === 'error') {
+          throw new Error(result.message || 'The form service did not accept the request.');
+        }
+        form.reset();
+        emailSubject.value = 'New Tech Help Request';
+        showStatus('success', 'Your request was submitted. Lorenzo will need to contact you separately to confirm whether an appointment and time are available. If this is your first submission on this site, FormSubmit may require email activation before delivery is enabled.');
+        status.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      } catch (error) {
+        showStatus('error', 'We couldn’t send your request. Check your connection and try again, or contact Lorenzo directly by email at lorenzonai90@gmail.com or phone at +1 413-654-7039. If the site has not been activated with FormSubmit yet, the inbox owner must complete its activation email first.');
+      } finally {
+        submitButton.disabled = false;
+        submitButton.innerHTML = 'Submit Booking Request <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13"/><path d="m22 2-7 20-4-9-9-4Z"/></svg>';
+      }
+    });
+  </script>
+</body>
+</html>
